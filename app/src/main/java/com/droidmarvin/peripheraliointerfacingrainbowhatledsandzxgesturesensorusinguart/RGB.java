@@ -45,7 +45,28 @@ public class RGB {
         }
     }
 
+    private void changeColor(Color color) {
+        byte[] data = new byte[TRANSACTION_SIZE];
+        for (int i = 0; i <= 3; i++) {
+            data[i] = ZERO_BITS;
+        }
+        int p = 4;
+        for (int i = 0; i < 7; i++) {
+            data[p++] = LED_BRIGHT_START_BYTE;
+            data[p++] = (byte) color.b;
+            data[p++] = (byte) color.g;
+            data[p++] = (byte) color.r;
+        }
+        for (int i = 32; i < TRANSACTION_SIZE; i++) {
+            data[i] = ZERO_BITS;
+        }
 
+        try {
+            mRGB.write(data, data.length);
+        } catch (IOException e) {
+            throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " cannot be written to.", e);
+        }
+    }
 
     private static final class Color {
         private static final Color RED = new Color(50, 0, 0);
