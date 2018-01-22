@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         destroyZxGestureSensor();
+        rgb.destroyRGB();
 
     }
 
