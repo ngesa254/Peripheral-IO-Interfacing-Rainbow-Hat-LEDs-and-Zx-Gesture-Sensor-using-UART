@@ -109,10 +109,6 @@ public class RGB {
         }
     }
 
-    /**
-     * Call in on destroy to disconnect from the rainbow hat leds
-     */
-
     private void destroyRGB() {
         if (mRGB != null) {
             try {

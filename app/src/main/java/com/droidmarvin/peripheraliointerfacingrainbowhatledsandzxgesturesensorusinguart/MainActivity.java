@@ -14,15 +14,19 @@ public class MainActivity extends Activity {
     private static final String UART_GESTURE_SENSOR = "UART0";
     private UartDevice mZxGSensor;
 
+    private final RGB rgb = new RGB();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rgb.setUpRGB();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         destroyZxGestureSensor();
+
     }
 
     private void setupZxGestureSensor() {
