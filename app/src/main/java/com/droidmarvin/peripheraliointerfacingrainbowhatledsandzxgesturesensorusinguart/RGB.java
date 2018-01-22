@@ -52,6 +52,13 @@ public class RGB {
         changeColor(Color.RAINBOW[position]);
     }
 
+    void previousColor() {
+        if (--position < 0) {
+            position += Color.RAINBOW.length;
+        }
+        changeColor(Color.RAINBOW[position]);
+    }
+
     private void changeColor(Color color) {
         byte[] data = new byte[TRANSACTION_SIZE];
         for (int i = 0; i <= 3; i++) {
