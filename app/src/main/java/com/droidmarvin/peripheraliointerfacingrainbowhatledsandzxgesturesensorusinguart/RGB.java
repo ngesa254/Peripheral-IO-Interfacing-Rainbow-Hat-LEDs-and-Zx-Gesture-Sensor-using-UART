@@ -109,7 +109,7 @@ public class RGB {
         }
     }
 
-    private void destroyRGB() {
+    public void destroyRGB() {
         if (mRGB != null) {
             try {
                 mRGB.close();
