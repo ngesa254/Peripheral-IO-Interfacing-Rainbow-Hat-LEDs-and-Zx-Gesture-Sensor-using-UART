@@ -25,5 +25,14 @@ public class RGB {
         } catch (IOException e) {
             throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + "error opening connection", e);
         }
+
+        try {
+            mRGB.setMode(SpiDevice.MODE2);
+//            bus.setFrequency(1_000_000); // 1Mhz
+//            bus.setBitsPerWord(8);
+//            bus.setBitJustification(true);
+        } catch (IOException e) {
+            throw new IllegalStateException(APA102_RGB_7_LED_SLAVE + " cannot be configured.", e);
+        }
     }
 }
