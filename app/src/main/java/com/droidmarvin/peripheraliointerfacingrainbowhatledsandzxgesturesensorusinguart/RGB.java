@@ -1,6 +1,7 @@
 package com.droidmarvin.peripheraliointerfacingrainbowhatledsandzxgesturesensorusinguart;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.google.android.things.pio.PeripheralManagerService;
 import com.google.android.things.pio.SpiDevice;
@@ -105,6 +106,22 @@ public class RGB {
             this.r = r;
             this.g = g;
             this.b = b;
+        }
+    }
+
+    /**
+     * Call in on destroy to disconnect from the rainbow hat leds
+     */
+
+    private void destroyRGB() {
+        if (mRGB != null) {
+            try {
+                mRGB.close();
+            } catch (IOException e) {
+                Log.e("TUT", APA102_RGB_7_LED_SLAVE + "error closing RGB", e);
+            } finally {
+                mRGB = null;
+            }
         }
     }
 
