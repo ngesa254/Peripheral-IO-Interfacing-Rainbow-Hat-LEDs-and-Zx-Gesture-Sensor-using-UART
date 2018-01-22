@@ -28,11 +28,19 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        try {
+            mZxGSensor.registerUartDeviceCallback(onUartBusHasData);
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot listen for input from " + UART_GESTURE_SENSOR, e);
+        }
+    }
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         destroyZxGestureSensor();
         rgb.destroyRGB();
-
     }
 
     private void setupZxGestureSensor() {
@@ -64,7 +72,6 @@ public class MainActivity extends Activity {
 
             return true;
         }
-
 
         private void handleGestureSensorEvent(byte[] payload) {
             byte messageCode = payload[0];
