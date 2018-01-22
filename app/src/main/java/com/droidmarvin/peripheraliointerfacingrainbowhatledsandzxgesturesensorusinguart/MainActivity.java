@@ -10,6 +10,7 @@ import com.google.android.things.pio.UartDevice;
 import java.io.IOException;
 
 public class MainActivity extends Activity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final String UART_GESTURE_SENSOR = "UART0";
     private UartDevice mZxGSensor;
 
@@ -33,6 +34,15 @@ public class MainActivity extends Activity {
     }
 
     private void destroyZxGestureSensor() {
+        if (mZxGSensor != null) {
+            try {
+                mZxGSensor.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Error closing ZXGestureSensor", e);
+            } finally {
+                mZxGSensor = null;
+            }
+        }
     }
 }
 
