@@ -29,8 +29,13 @@ public class MainActivity extends Activity {
         try {
             PeripheralManagerService service = new PeripheralManagerService();
             mZxGSensor = service.openUartDevice(UART_GESTURE_SENSOR);
+
+            mZxGSensor.setBaudrate(115200);
+            mZxGSensor.setDataSize(8);
+            mZxGSensor.setParity(UartDevice.PARITY_NONE);
+            mZxGSensor.setStopBits(1);
         } catch (IOException e) {
-            throw new IllegalStateException(UART_GESTURE_SENSOR + " error connecting to the pin", e);
+            throw new IllegalStateException(UART_GESTURE_SENSOR + " error connecting to the pin/pin configuration", e);
         }
     }
 
